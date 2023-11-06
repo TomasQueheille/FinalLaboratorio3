@@ -1,11 +1,15 @@
 package ar.edu.utn.frbb.tup.controller;
 
 import ar.edu.utn.frbb.tup.business.MateriaService;
+import ar.edu.utn.frbb.tup.model.Alumno;
 import ar.edu.utn.frbb.tup.model.Materia;
 import ar.edu.utn.frbb.tup.model.Profesor;
+import ar.edu.utn.frbb.tup.model.dto.AlumnoDto;
 import ar.edu.utn.frbb.tup.model.dto.MateriaDto;
 import ar.edu.utn.frbb.tup.persistence.exception.MateriaNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Arrays;
@@ -24,8 +28,9 @@ public class MateriaController {
     }
 
     @PostMapping("/materia")
-    public Materia crearMateria(@RequestBody MateriaDto materiaDto) {
-        return materiaService.crearMateria(materiaDto);
+    public ResponseEntity<Materia> crearMateria(@RequestBody MateriaDto materiaDto) {
+
+        return ResponseEntity.status(HttpStatus.CREATED).body(materiaService.crearMateria(materiaDto));
     }
 
     @GetMapping("/{idMateria}")
