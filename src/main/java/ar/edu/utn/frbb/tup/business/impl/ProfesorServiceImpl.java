@@ -2,6 +2,7 @@ package ar.edu.utn.frbb.tup.business.impl;
 
 import ar.edu.utn.frbb.tup.business.ProfesorService;
 import ar.edu.utn.frbb.tup.model.Profesor;
+import ar.edu.utn.frbb.tup.model.exception.ProfesorNoEncotnrado;
 import ar.edu.utn.frbb.tup.persistence.MateriaDao;
 import ar.edu.utn.frbb.tup.persistence.MateriaDaoMemoryImpl;
 import ar.edu.utn.frbb.tup.persistence.ProfesorDao;
@@ -15,7 +16,7 @@ public class ProfesorServiceImpl implements ProfesorService {
     private ProfesorDao dao;
 
     @Override
-    public Profesor buscarProfesor(int id) {
+    public Profesor buscarProfesor(int id) throws ProfesorNoEncotnrado {
         return dao.get(id);
     }
 }

@@ -22,7 +22,7 @@ public class MateriaDaoMemoryImpl implements MateriaDao {
     }
 
     @Override
-    public Materia save(Materia materia) {
+    public Materia saveMateria(Materia materia) {
         Random random = new Random();
         materia.setMateriaId(random.nextInt());
         repositorioMateria.put(materia.getMateriaId(), materia);

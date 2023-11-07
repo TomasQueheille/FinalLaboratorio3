@@ -6,6 +6,7 @@ import ar.edu.utn.frbb.tup.model.Alumno;
 import ar.edu.utn.frbb.tup.model.Materia;
 import ar.edu.utn.frbb.tup.model.Profesor;
 import ar.edu.utn.frbb.tup.model.dto.MateriaDto;
+import ar.edu.utn.frbb.tup.model.exception.ProfesorNoEncotnrado;
 import ar.edu.utn.frbb.tup.persistence.MateriaDao;
 import ar.edu.utn.frbb.tup.persistence.MateriaDaoMemoryImpl;
 import ar.edu.utn.frbb.tup.persistence.exception.MateriaNotFoundException;
@@ -24,13 +25,13 @@ public class MateriaServiceImpl implements MateriaService {
     private ProfesorService profesorService;
 
     @Override
-    public Materia crearMateria(MateriaDto materia) throws IllegalArgumentException{
+    public Materia crearMateria(MateriaDto materia) throws IllegalArgumentException, ProfesorNoEncotnrado {
         Materia m = new Materia();
         m.setNombre(materia.getNombre());
         m.setAnio(materia.getAnio());
         m.setCuatrimestre(materia.getCuatrimestre());
         m.setProfesor(profesorService.buscarProfesor(materia.getProfesorId()));
-        dao.save(m);
+        dao.saveMateria(m);
 
         return m;
     }

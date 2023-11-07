@@ -23,7 +23,7 @@ public class AlumnoTest {
     @BeforeAll
     public static void setUp() {
 
-        profesor1 = new Profesor(id, "Luciano", "Salotto", "Lic.");
+        profesor1 = new Profesor("Luciano", "Salotto", "Lic.");
         m1 = new Materia("Laboratorio 1", 1, 1, profesor1);
         m2 = new Materia("Laboratorio 2", 1, 2, profesor1);
         m3 = new Materia("Laboratorio 3", 2, 1, profesor1);

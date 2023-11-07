@@ -6,7 +6,7 @@ import java.util.List;
 
 public interface MateriaDao {
     List<Materia> getAll();
-    Materia save(Materia materia);
+    Materia saveMateria(Materia materia);
 
     Materia findById(int idMateria) throws MateriaNotFoundException;
 }

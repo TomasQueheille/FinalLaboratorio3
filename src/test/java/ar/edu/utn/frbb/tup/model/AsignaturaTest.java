@@ -15,7 +15,7 @@ public class AsignaturaTest {
 
     @BeforeAll
     public static void setUp(){
-        profesor = new Profesor(id, "Luciano", "Salotto", "Lic.");
+        profesor = new Profesor("Luciano", "Salotto", "Lic.");
         materia = new Materia("Laboratorio 3", 2, 1, profesor);
     }
 

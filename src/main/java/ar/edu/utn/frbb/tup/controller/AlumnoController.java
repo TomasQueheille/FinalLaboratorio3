@@ -15,11 +15,11 @@ public class AlumnoController {
     @Autowired
     private AlumnoService alumnoService;
 
-    @PostMapping("/alumno") //POST: /alumno
+    @PostMapping("/alumno")
     public ResponseEntity<Alumno> crearAlumno(@RequestBody AlumnoDto alumnoDto) {
         return ResponseEntity.status(HttpStatus.CREATED).body(alumnoService.crearAlumno(alumnoDto));
     }
-    @GetMapping
+    @GetMapping("/alumno")
     public Alumno buscarAlumno(@RequestParam String apellido) {
 
        return alumnoService.buscarAlumno(apellido);
