@@ -26,8 +26,11 @@ public class AlumnoServiceImpl implements AlumnoService {
     @Autowired
     private MateriaServiceImpl materiaService;
 
-    private static final AlumnoDao alumnoDao = new AlumnoDaoMemoryImpl();
-    private static final AsignaturaService asignaturaService = new AsignaturaServiceImpl();
+    @Autowired
+    private AlumnoDao alumnoDao;
+
+    @Autowired
+    private AsignaturaService asignaturaService;
 
     @Override
     public void aprobarAsignatura(int materiaId, int nota, long dni) throws EstadoIncorrectoException, CorrelatividadesNoAprobadasException {
@@ -61,7 +64,16 @@ public class AlumnoServiceImpl implements AlumnoService {
     }
 
     @Override
-    public Alumno buscarAlumno(String apellido) {
-        return alumnoDao.findAlumno(apellido);
+    public Alumno buscarAlumnoId(Long id) {
+       return alumnoDao.findAlumnoId(id);
+    }
+
+    @Override
+    public Alumno editAlumnobyId(Long id, AlumnoDto alumno) {
+        Alumno a = buscarAlumnoId(id);
+        a.setNombre(alumno.getNombre());
+        a.setApellido(alumno.getApellido());
+        a.setDni(alumno.getDni());
+        return a;
     }
 }

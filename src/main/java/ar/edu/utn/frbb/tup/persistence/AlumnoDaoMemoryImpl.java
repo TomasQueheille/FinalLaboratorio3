@@ -1,9 +1,7 @@
 package ar.edu.utn.frbb.tup.persistence;
 
-import ar.edu.utn.frbb.tup.business.impl.MateriaServiceImpl;
+
 import ar.edu.utn.frbb.tup.model.Alumno;
-import ar.edu.utn.frbb.tup.persistence.exception.DaoException;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
@@ -27,9 +25,9 @@ public class AlumnoDaoMemoryImpl implements AlumnoDao {
     }
 
     @Override
-    public Alumno findAlumno(String apellidoAlumno) {
-        for (Alumno a: repositorioAlumnos.values()) {
-            if (a.getApellido().equals(apellidoAlumno)){
+    public Alumno findAlumnoId(Long id) {
+        for(Alumno a : repositorioAlumnos.values()){
+            if (a.getId() == id){
                 return a;
             }
         }

@@ -10,9 +10,11 @@ import ar.edu.utn.frbb.tup.persistence.AlumnoDaoMemoryImpl;
 import ar.edu.utn.frbb.tup.persistence.AsignaturaDao;
 import ar.edu.utn.frbb.tup.persistence.AsignaturaDaoMemoryImpl;
 import ar.edu.utn.frbb.tup.persistence.exception.DaoException;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+@Service
 public class AsignaturaServiceImpl implements AsignaturaService {
     @Override
     public Asignatura getAsignatura(int materiaId, long dni) {

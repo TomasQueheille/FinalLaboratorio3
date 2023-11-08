@@ -19,10 +19,16 @@ public class AlumnoController {
     public ResponseEntity<Alumno> crearAlumno(@RequestBody AlumnoDto alumnoDto) {
         return ResponseEntity.status(HttpStatus.CREATED).body(alumnoService.crearAlumno(alumnoDto));
     }
-    @GetMapping("/alumno")
-    public Alumno buscarAlumno(@RequestParam String apellido) {
-
-       return alumnoService.buscarAlumno(apellido);
-
+    @GetMapping("/alumno/{idAlumno}")
+    public ResponseEntity<Alumno> buscarAlumnoId(@PathVariable Long id) {
+        return ResponseEntity.status(HttpStatus.OK).body(alumnoService.buscarAlumnoId(id));
     }
+
+    @PutMapping("/alumno/{idAlumno}")
+    public ResponseEntity<Alumno> editAlumnobyId(@PathVariable Long id, @RequestBody AlumnoDto alumnoDto){
+        return ResponseEntity.status(HttpStatus.OK).body(alumnoService.editAlumnobyId(id, alumnoDto));
+    }
+
+
+
 }
