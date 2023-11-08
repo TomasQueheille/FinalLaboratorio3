@@ -10,5 +10,5 @@ import java.util.List;
 public interface CarreraService {
     public List<Materia> sinMaterias() throws MateriaException;
 
-    Carrera crearCarrera(CarreraDto carrera);
+    Carrera crearCarrera(CarreraDto carrera) throws MateriaException;
 }

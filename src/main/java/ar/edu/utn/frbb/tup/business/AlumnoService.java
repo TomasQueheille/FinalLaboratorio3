@@ -6,11 +6,11 @@ import ar.edu.utn.frbb.tup.model.exception.CorrelatividadesNoAprobadasException;
 import ar.edu.utn.frbb.tup.model.exception.EstadoIncorrectoException;
 
 public interface AlumnoService {
-    void aprobarAsignatura(int materiaId, int nota, long dni) throws EstadoIncorrectoException, CorrelatividadesNoAprobadasException;
+    void aprobarAsignatura(int materiaId, int nota, int dni) throws EstadoIncorrectoException, CorrelatividadesNoAprobadasException;
 
     Alumno crearAlumno(AlumnoDto alumno);
 
-    Alumno buscarAlumnoId(Long id);
+    Alumno buscarAlumnoId(int id);
 
-    Alumno editAlumnobyId(Long id, AlumnoDto alumno);
+    Alumno editAlumnobyId(int id, AlumnoDto alumno);
 }

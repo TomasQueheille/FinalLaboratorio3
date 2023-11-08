@@ -11,7 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Alumno {
-    private long id;
+    private int id;
     private String nombre;
     private String apellido;
     private int dni;
@@ -57,7 +57,7 @@ public class Alumno {
         return apellido;
     }
 
-    public long getDni() {
+    public int getDni() {
         return dni;
     }
 
@@ -115,11 +115,12 @@ public class Alumno {
 
     }
 
-    public long getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(int id) {
         this.id = id;
     }
+
 }

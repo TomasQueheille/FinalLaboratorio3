@@ -31,15 +31,20 @@ public class CarreraServiceImpl implements CarreraService {
     }
 
     @Override
-    public Carrera crearCarrera(CarreraDto carrera) {
-        Carrera c = new Carrera();
-        c.setNombre(carrera.getNombre());
-        c.setCodigoCarrera(carrera.getCodigoCarrera());
-        c.setCantidadAnios(carrera.getCantidadAnios());
-        c.setDepartamento(carrera.getDepartamento());
-        c.setMateriasList(carrera.getMateriasList());
-        dao.saveCarrera(c);
+    public Carrera crearCarrera(CarreraDto carrera) throws MateriaException {
+        if (!materiaService.getAllMaterias().isEmpty()){
+            Carrera c = new Carrera();
+            c.setNombre(carrera.getNombre());
+            c.setCodigoCarrera(carrera.getCodigoCarrera());
+            c.setCantidadAnios(carrera.getCantidadAnios());
+            c.setDepartamento(carrera.getDepartamento());
+            c.setMateriasList(materiaService.getAllMaterias());
+            dao.saveCarrera(c);
 
-        return c;
+            return c;
+        }
+        else{
+            throw new MateriaException("No hay materias para crear la carrera");
+        }
     }
 }

@@ -4,6 +4,7 @@ package ar.edu.utn.frbb.tup.controller;
 import ar.edu.utn.frbb.tup.business.CarreraService;
 import ar.edu.utn.frbb.tup.model.Carrera;
 import ar.edu.utn.frbb.tup.model.dto.CarreraDto;
+import ar.edu.utn.frbb.tup.model.exception.MateriaException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -19,7 +20,7 @@ public class CarreraController {
     private CarreraService carreraService;
 
     @PostMapping("/carrera")
-    public ResponseEntity<Carrera> crearCarrera(@RequestBody CarreraDto carreraDto) {
+    public ResponseEntity<Carrera> crearCarrera(@RequestBody CarreraDto carreraDto) throws MateriaException {
         return ResponseEntity.status(HttpStatus.CREATED).body(carreraService.crearCarrera(carreraDto));
     }
 

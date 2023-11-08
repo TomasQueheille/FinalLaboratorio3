@@ -15,29 +15,27 @@ import java.util.Random;
 public class AlumnoDaoMemoryImpl implements AlumnoDao {
 
 
-    private static Map<Long, Alumno> repositorioAlumnos = new HashMap<>();
+    private static Map<Integer, Alumno> repositorioAlumnos = new HashMap<>();
 
     @Override
     public Alumno saveAlumno(Alumno alumno) {
         Random random = new Random();
-        alumno.setId(random.nextLong());
+        alumno.setId(random.nextInt());
         return repositorioAlumnos.put(alumno.getDni(), alumno);
     }
 
     @Override
-    public Alumno findAlumnoId(Long id) {
-        for(Alumno a : repositorioAlumnos.values()){
-            if (a.getId() == id){
+    public Alumno findAlumnoId(int idAlumno){
+        for (Alumno a: repositorioAlumnos.values()) {
+            if (a.getId() == idAlumno) {
                 return a;
             }
         }
-        throw new ResponseStatusException(
-                HttpStatus.NOT_FOUND, "No existen alumnos con esos datos."
-        );
+        return null;
     }
 
     @Override
-    public Alumno loadAlumno(Long dni) {
+    public Alumno loadAlumno(int dni) {
         return null;
     }
 

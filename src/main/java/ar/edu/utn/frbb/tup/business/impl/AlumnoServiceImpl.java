@@ -10,9 +10,7 @@ import ar.edu.utn.frbb.tup.model.dto.AlumnoDto;
 import ar.edu.utn.frbb.tup.model.exception.CorrelatividadesNoAprobadasException;
 import ar.edu.utn.frbb.tup.model.exception.EstadoIncorrectoException;
 import ar.edu.utn.frbb.tup.persistence.AlumnoDao;
-import ar.edu.utn.frbb.tup.persistence.AlumnoDaoMemoryImpl;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -33,7 +31,7 @@ public class AlumnoServiceImpl implements AlumnoService {
     private AsignaturaService asignaturaService;
 
     @Override
-    public void aprobarAsignatura(int materiaId, int nota, long dni) throws EstadoIncorrectoException, CorrelatividadesNoAprobadasException {
+    public void aprobarAsignatura(int materiaId, int nota, int dni) throws EstadoIncorrectoException, CorrelatividadesNoAprobadasException {
         Asignatura a = asignaturaService.getAsignatura(materiaId, dni);
         for (Materia m:
              a.getMateria().getCorrelatividades()) {
@@ -58,22 +56,24 @@ public class AlumnoServiceImpl implements AlumnoService {
         List<Asignatura> asignaturaList = new ArrayList<>();
         a.setAsignaturas(asignaturaList);
         Random random = new Random();
-        a.setId(random.nextLong());
+        a.setId(random.nextInt());
         alumnoDao.saveAlumno(a);
         return a;
     }
 
     @Override
-    public Alumno buscarAlumnoId(Long id) {
+    public Alumno buscarAlumnoId(int id) {
        return alumnoDao.findAlumnoId(id);
     }
 
     @Override
-    public Alumno editAlumnobyId(Long id, AlumnoDto alumno) {
-        Alumno a = buscarAlumnoId(id);
+    public Alumno editAlumnobyId(int id, AlumnoDto alumno) {
+        Alumno a = alumnoDao.findAlumnoId(id);
         a.setNombre(alumno.getNombre());
         a.setApellido(alumno.getApellido());
         a.setDni(alumno.getDni());
+        System.out.println(buscarAlumnoId(id));
+        System.out.println(a);
         return a;
     }
 }

@@ -20,13 +20,14 @@ public class AlumnoController {
         return ResponseEntity.status(HttpStatus.CREATED).body(alumnoService.crearAlumno(alumnoDto));
     }
     @GetMapping("/alumno/{idAlumno}")
-    public ResponseEntity<Alumno> buscarAlumnoId(@PathVariable Long id) {
-        return ResponseEntity.status(HttpStatus.OK).body(alumnoService.buscarAlumnoId(id));
+    public ResponseEntity<Alumno> buscarAlumnoId(@PathVariable Integer idAlumno){
+        return ResponseEntity.status(HttpStatus.OK).body(alumnoService.buscarAlumnoId(idAlumno));
     }
 
     @PutMapping("/alumno/{idAlumno}")
-    public ResponseEntity<Alumno> editAlumnobyId(@PathVariable Long id, @RequestBody AlumnoDto alumnoDto){
-        return ResponseEntity.status(HttpStatus.OK).body(alumnoService.editAlumnobyId(id, alumnoDto));
+    public ResponseEntity<Alumno> editAlumnobyId(@PathVariable Integer idAlumno, @RequestBody AlumnoDto alumnoDto){
+        System.out.println(idAlumno);
+        return ResponseEntity.status(HttpStatus.OK).body(alumnoService.editAlumnobyId(idAlumno, alumnoDto));
     }
 
 
