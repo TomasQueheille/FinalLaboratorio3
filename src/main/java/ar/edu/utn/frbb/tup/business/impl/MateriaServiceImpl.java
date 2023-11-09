@@ -2,19 +2,18 @@ package ar.edu.utn.frbb.tup.business.impl;
 
 import ar.edu.utn.frbb.tup.business.MateriaService;
 import ar.edu.utn.frbb.tup.business.ProfesorService;
-import ar.edu.utn.frbb.tup.model.Alumno;
 import ar.edu.utn.frbb.tup.model.Materia;
 import ar.edu.utn.frbb.tup.model.Profesor;
 import ar.edu.utn.frbb.tup.model.dto.MateriaDto;
+import ar.edu.utn.frbb.tup.model.exception.NombreMateriaException;
 import ar.edu.utn.frbb.tup.model.exception.ProfesorNoEncotnrado;
 import ar.edu.utn.frbb.tup.persistence.MateriaDao;
-import ar.edu.utn.frbb.tup.persistence.MateriaDaoMemoryImpl;
 import ar.edu.utn.frbb.tup.persistence.exception.MateriaNotFoundException;
+import ar.edu.utn.frbb.tup.persistence.exception.OrderMateriaException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Random;
 
 @Service
 public class MateriaServiceImpl implements MateriaService {
@@ -67,6 +66,21 @@ public class MateriaServiceImpl implements MateriaService {
 
         }
         return m;
+    }
+
+    @Override
+    public Materia buscarNombreMateria(String nombre) throws NombreMateriaException {
+        Materia m = dao.buscarNombreMateria(nombre);
+        if (m == null) {
+            throw new NombreMateriaException("La materia no fue encontrada");
+        }
+
+        return m;
+    }
+
+    @Override
+    public List<Materia> ordenarMateria(String order) throws OrderMateriaException {
+        return dao.ordenarMateria(order);
     }
 
     /*@Override
