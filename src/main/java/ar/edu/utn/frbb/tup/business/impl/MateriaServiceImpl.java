@@ -46,25 +46,17 @@ public class MateriaServiceImpl implements MateriaService {
     }
 
     @Override
-    public Materia putMateria(int idMateria, MateriaDto materiaDto) throws MateriaNotFoundException{
-        Materia m = new Materia();
-
-        try{
-            m = dao.findById(idMateria);
-            m.setNombre(materiaDto.getNombre());
-            m.setCuatrimestre(materiaDto.getCuatrimestre());
-            m.setAnio(materiaDto.getAnio());
-            Profesor p = profesorService.buscarProfesor(materiaDto.getProfesorId());
-            if (p == null){
-                throw new Exception();
-            }
-            else{
-                m.setProfesor(p);
-            }
+    public Materia editMateriabyId(int idMateria, MateriaDto materiaDto) throws MateriaNotFoundException, ProfesorNoEncotnrado {
+        Materia m = dao.findById(idMateria);
+        m.setNombre(materiaDto.getNombre());
+        m.setAnio(materiaDto.getAnio());
+        m.setCuatrimestre(materiaDto.getCuatrimestre());
+        m.setProfesor(profesorService.buscarProfesor(materiaDto.getProfesorId()));
+        dao.saveMateria(m);
+        if (m == null) {
+            throw new MateriaNotFoundException("No se encontro el id de materia");
         }
-        catch (Exception e){
 
-        }
         return m;
     }
 

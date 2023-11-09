@@ -26,7 +26,6 @@ public class AlumnoController {
 
     @PutMapping("/alumno/{idAlumno}")
     public ResponseEntity<Alumno> editAlumnobyId(@PathVariable Integer idAlumno, @RequestBody AlumnoDto alumnoDto){
-        System.out.println(idAlumno);
         return ResponseEntity.status(HttpStatus.OK).body(alumnoService.editAlumnobyId(idAlumno, alumnoDto));
     }
 

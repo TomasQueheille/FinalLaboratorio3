@@ -16,7 +16,7 @@ public interface MateriaService {
 
     Materia getMateriaById(int idMateria) throws MateriaNotFoundException;
 
-    Materia putMateria(int idMateria, MateriaDto materiaDto) throws MateriaNotFoundException;
+    Materia editMateriabyId(int idMateria, MateriaDto materiaDto) throws MateriaNotFoundException, ProfesorNoEncotnrado;
     Materia buscarNombreMateria(String nombre) throws NombreMateriaException;
 
     List<Materia> ordenarMateria(String order) throws OrderMateriaException;

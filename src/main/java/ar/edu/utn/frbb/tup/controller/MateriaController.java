@@ -49,8 +49,8 @@ public class MateriaController {
     }
 
     @PutMapping("/materia/{idMateria}")
-    public Materia putMateria(@PathVariable Integer idMateria, @RequestBody MateriaDto materiaDto) throws MateriaNotFoundException {
-        return materiaService.putMateria(idMateria, materiaDto);
+    public ResponseEntity<Materia> editMateriabyId(@PathVariable Integer idMateria, @RequestBody MateriaDto materiaDto) throws MateriaNotFoundException, ProfesorNoEncotnrado {
+        return ResponseEntity.status(HttpStatus.OK).body(materiaService.editMateriabyId(idMateria, materiaDto));
     }
 
     @GetMapping("/materias")

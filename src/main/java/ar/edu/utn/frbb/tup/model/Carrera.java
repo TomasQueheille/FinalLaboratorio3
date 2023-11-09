@@ -4,7 +4,6 @@ import java.util.List;
 
 
 public class Carrera {
-
     private String nombre;
     private int codigoCarrera;
     private int cantidadAnios;
@@ -63,4 +62,5 @@ public class Carrera {
 
     public void agregarMateria(Materia materia) {
     }
+
 }

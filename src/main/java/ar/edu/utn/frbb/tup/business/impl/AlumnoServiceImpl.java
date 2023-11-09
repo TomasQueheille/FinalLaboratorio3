@@ -48,6 +48,11 @@ public class AlumnoServiceImpl implements AlumnoService {
     }
 
     @Override
+    public List<Alumno> getAllAlumnos() {
+        return alumnoDao.getAll();
+    }
+
+    @Override
     public Alumno crearAlumno(AlumnoDto alumno) {
         Alumno a = new Alumno();
         a.setNombre(alumno.getNombre());
@@ -73,7 +78,13 @@ public class AlumnoServiceImpl implements AlumnoService {
         a.setApellido(alumno.getApellido());
         a.setDni(alumno.getDni());
         System.out.println(buscarAlumnoId(id));
-        System.out.println(a);
+        alumnoDao.saveAlumno(a);
+
         return a;
+    }
+
+    @Override
+    public Alumno deleteAlumnoById(int id) {
+
     }
 }

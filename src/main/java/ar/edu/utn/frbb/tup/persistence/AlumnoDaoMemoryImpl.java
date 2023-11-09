@@ -2,13 +2,13 @@ package ar.edu.utn.frbb.tup.persistence;
 
 
 import ar.edu.utn.frbb.tup.model.Alumno;
+import ar.edu.utn.frbb.tup.model.Materia;
+import ar.edu.utn.frbb.tup.persistence.exception.AlumnoNotFoundException;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Random;
+import java.util.*;
 
 
 @Service
@@ -16,6 +16,16 @@ public class AlumnoDaoMemoryImpl implements AlumnoDao {
 
 
     private static Map<Integer, Alumno> repositorioAlumnos = new HashMap<>();
+
+    @Override
+    public List<Alumno> getAll() {
+        List<Alumno> listaAlumnos = new ArrayList<>();
+        for (Map.Entry<Integer, Alumno> entry : repositorioAlumnos.entrySet()) {
+            Alumno alumno = entry.getValue();
+            listaAlumnos.add(alumno);
+        }
+        return listaAlumnos;
+    }
 
     @Override
     public Alumno saveAlumno(Alumno alumno) {
@@ -32,6 +42,17 @@ public class AlumnoDaoMemoryImpl implements AlumnoDao {
             }
         }
         return null;
+    }
+
+    @Override
+    public Alumno deleteAlumno(Alumno alumno) throws AlumnoNotFoundException {
+        for (Alumno a : repositorioAlumnos.values()){
+            if(a.getId() == alumno.getId()){
+                repositorioAlumnos.values().remove(alumno);
+                System.out.println("El alumno fue eliminado exitosamente");
+            }
+        }
+        throw new AlumnoNotFoundException("No se encontro al alumno");
     }
 
     @Override
