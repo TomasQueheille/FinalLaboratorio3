@@ -35,13 +35,13 @@ public class AlumnoDaoMemoryImpl implements AlumnoDao {
     }
 
     @Override
-    public Alumno findAlumnoId(int idAlumno){
+    public Alumno findAlumnoId(int idAlumno) throws AlumnoNotFoundException{
         for (Alumno a: repositorioAlumnos.values()) {
             if (a.getId() == idAlumno) {
                 return a;
             }
         }
-        return null;
+        throw new AlumnoNotFoundException("El alumno no se encontro/fue eliminado");
     }
 
     @Override
@@ -50,6 +50,8 @@ public class AlumnoDaoMemoryImpl implements AlumnoDao {
             if(a.getId() == alumno.getId()){
                 repositorioAlumnos.values().remove(alumno);
                 System.out.println("El alumno fue eliminado exitosamente");
+
+                return a;
             }
         }
         throw new AlumnoNotFoundException("No se encontro al alumno");

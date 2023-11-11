@@ -12,4 +12,5 @@ public interface CarreraDao {
     List<Carrera> getAll();
     Carrera saveCarrera (Carrera c);
     Carrera findByCodigo (int codigoCarrera) throws CarreraNotFoundException;
+    Carrera deleteCarrera (Carrera carrera) throws CarreraNotFoundException;
 }

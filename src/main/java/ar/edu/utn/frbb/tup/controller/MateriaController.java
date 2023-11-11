@@ -58,9 +58,9 @@ public class MateriaController {
         return materiaService.ordenarMateria(order);
     }
 
-    /*@DeleteMapping("/materia/{idMateria}")
-    public Materia deleteMateria(){
-
-    }*/
+    @DeleteMapping("/materia/{idMateria}")
+    public ResponseEntity<Materia> deleteMateria(@PathVariable Integer idMateria) throws MateriaNotFoundException {
+        return ResponseEntity.status(HttpStatus.OK).body(materiaService.deleteMateriaById(idMateria));
+    }
 
 }

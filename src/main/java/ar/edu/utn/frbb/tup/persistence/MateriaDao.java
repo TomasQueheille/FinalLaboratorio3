@@ -13,4 +13,5 @@ public interface MateriaDao {
     Materia findById(int idMateria) throws MateriaNotFoundException;
     Materia buscarNombreMateria (String nombre);
     List<Materia> ordenarMateria (String order) throws OrderMateriaException;
+    Materia deleteMateria (Materia materia) throws MateriaNotFoundException;
 }

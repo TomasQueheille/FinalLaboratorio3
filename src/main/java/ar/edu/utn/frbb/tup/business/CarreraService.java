@@ -17,4 +17,5 @@ public interface CarreraService {
     List<Carrera> getAllCarreras();
     Carrera crearCarrera(CarreraDto carrera) throws MateriaException;
     Carrera editCarreraById(int codigoCarrera, CarreraDto carrera) throws CarreraNotFoundException;
+    Carrera deleteCarreraById(int codigoCarrera) throws CarreraNotFoundException;
 }

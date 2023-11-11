@@ -40,4 +40,17 @@ public class CarreraDaoMemoryImpl implements CarreraDao{
         }
         throw new CarreraNotFoundException("No se encontró la carrera con ese codigo " + codigoCarrera);
     }
+
+    @Override
+    public Carrera deleteCarrera(Carrera carrera) throws CarreraNotFoundException {
+        for(Carrera c : repositorioCarrera.values()){
+            if(c.getCodigoCarrera() == carrera.getCodigoCarrera()){
+                repositorioCarrera.remove(carrera);
+                System.out.println("Carrera eliminada exitosamente");
+
+                return c;
+            }
+        }
+        throw new CarreraNotFoundException("No se encontro la carrera");
+    }
 }

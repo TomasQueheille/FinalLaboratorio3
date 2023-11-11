@@ -28,4 +28,9 @@ public class CarreraController {
         return ResponseEntity.status(HttpStatus.OK).body(carreraService.editCarreraById(codigoCarrera, carreraDto));
     }
 
+    @DeleteMapping("/carrera/{codigoCarrera}")
+    public ResponseEntity<Carrera> deleteCarreraById(@PathVariable int codigoCarrera) throws CarreraNotFoundException {
+        return ResponseEntity.status(HttpStatus.OK).body(carreraService.deleteCarreraById(codigoCarrera));
+    }
+
 }

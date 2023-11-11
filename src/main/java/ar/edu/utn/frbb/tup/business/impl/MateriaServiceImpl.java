@@ -71,12 +71,25 @@ public class MateriaServiceImpl implements MateriaService {
     }
 
     @Override
+    public Materia deleteMateriaById(int idMateria) throws MateriaNotFoundException {
+        for(Materia m: dao.getAll()){
+            if(m.getMateriaId() == idMateria){
+                dao.deleteMateria(m);
+
+                return m;
+            }
+        }
+        throw new MateriaNotFoundException("La materia no fue encontrada");
+    }
+
+    @Override
     public List<Materia> ordenarMateria(String order) throws OrderMateriaException {
         return dao.ordenarMateria(order);
     }
 
     /*@Override
-    public List<Materia> deleteMateria(int idMateria) throws MateriaNotFoundException{
+    public List<Materia> deleteMateriaById(int idMateria) throws MateriaNotFoundException{
+        for()
     }*/
 
 

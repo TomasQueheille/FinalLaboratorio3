@@ -10,6 +10,7 @@ import ar.edu.utn.frbb.tup.model.dto.AlumnoDto;
 import ar.edu.utn.frbb.tup.model.exception.CorrelatividadesNoAprobadasException;
 import ar.edu.utn.frbb.tup.model.exception.EstadoIncorrectoException;
 import ar.edu.utn.frbb.tup.persistence.AlumnoDao;
+import ar.edu.utn.frbb.tup.persistence.exception.AlumnoNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -67,12 +68,12 @@ public class AlumnoServiceImpl implements AlumnoService {
     }
 
     @Override
-    public Alumno buscarAlumnoId(int id) {
+    public Alumno buscarAlumnoId(int id) throws AlumnoNotFoundException {
        return alumnoDao.findAlumnoId(id);
     }
 
     @Override
-    public Alumno editAlumnobyId(int id, AlumnoDto alumno) {
+    public Alumno editAlumnobyId(int id, AlumnoDto alumno) throws AlumnoNotFoundException {
         Alumno a = alumnoDao.findAlumnoId(id);
         a.setNombre(alumno.getNombre());
         a.setApellido(alumno.getApellido());
@@ -84,7 +85,14 @@ public class AlumnoServiceImpl implements AlumnoService {
     }
 
     @Override
-    public Alumno deleteAlumnoById(int id) {
+    public Alumno deleteAlumnoById(int id) throws AlumnoNotFoundException {
+        for(Alumno a: alumnoDao.getAll()){
+            if(a.getId() == id){
+                alumnoDao.deleteAlumno(a);
 
+                return a;
+            }
+        }
+        throw new AlumnoNotFoundException("El alumno no fue encontrado");
     }
 }

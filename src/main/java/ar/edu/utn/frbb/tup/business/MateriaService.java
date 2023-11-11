@@ -11,13 +11,10 @@ import java.util.List;
 
 public interface MateriaService {
     Materia crearMateria(MateriaDto inputData) throws IllegalArgumentException, ProfesorNoEncotnrado;
-
     List<Materia> getAllMaterias();
-
     Materia getMateriaById(int idMateria) throws MateriaNotFoundException;
-
     Materia editMateriabyId(int idMateria, MateriaDto materiaDto) throws MateriaNotFoundException, ProfesorNoEncotnrado;
     Materia buscarNombreMateria(String nombre) throws NombreMateriaException;
-
+Materia deleteMateriaById(int idMateria) throws MateriaNotFoundException;
     List<Materia> ordenarMateria(String order) throws OrderMateriaException;
 }

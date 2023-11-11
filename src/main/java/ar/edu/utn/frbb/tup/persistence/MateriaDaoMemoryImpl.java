@@ -80,4 +80,17 @@ public class MateriaDaoMemoryImpl implements MateriaDao {
 
         return materiaList;
     }
+
+    @Override
+    public Materia deleteMateria(Materia materia) throws MateriaNotFoundException {
+        for(Materia m : repositorioMateria.values()){
+            if(m.getMateriaId() == materia.getMateriaId()){
+                repositorioMateria.values().remove(materia);
+                System.out.println("La materia fue eliminada exitosamente");
+
+                return m;
+            }
+        }
+        throw new MateriaNotFoundException("No se encontro la materia");
+    }
 }

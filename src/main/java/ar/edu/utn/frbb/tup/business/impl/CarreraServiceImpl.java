@@ -71,6 +71,18 @@ public class CarreraServiceImpl implements CarreraService {
         return c;
     }
 
+    @Override
+    public Carrera deleteCarreraById(int codigoCarrera) throws CarreraNotFoundException {
+        for(Carrera c : dao.getAll()){
+            if(c.getCodigoCarrera() == codigoCarrera){
+                dao.deleteCarrera(c);
+
+                return c;
+            }
+        }
+        throw new CarreraNotFoundException("La carrera no fue encontrada");
+    }
+
 
 
 }
