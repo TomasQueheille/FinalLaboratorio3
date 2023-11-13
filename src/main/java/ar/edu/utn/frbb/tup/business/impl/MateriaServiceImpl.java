@@ -41,11 +41,14 @@ public class MateriaServiceImpl implements MateriaService {
             for(Carrera c: carreraService.getAllCarreras()){
                 if(materia.getCodigoCarrera() == c.getCodigoCarrera()){
                     c.setMateriasList(agregarMateria(m));
+                    dao.saveMateria(m);
+
+                    return m;
+                }
+                else{
+                    throw new CarreraNotFoundException("No se encontro el codigo de la carrera");
                 }
             }
-            dao.saveMateria(m);
-
-            return m;
         }
         throw new CarreraNotFoundException("No hay carreras para crear la materia");
     }
@@ -67,7 +70,14 @@ public class MateriaServiceImpl implements MateriaService {
         m.setAnio(materiaDto.getAnio());
         m.setCuatrimestre(materiaDto.getCuatrimestre());
         m.setProfesor(profesorService.buscarProfesor(materiaDto.getProfesorId()));
+        m.setCodigoCarrera(materiaDto.getCodigoCarrera());
+        for(Carrera c: carreraService.getAllCarreras()){
+            if(materiaDto.getCodigoCarrera() == c.getCodigoCarrera()){
+                c.setMateriasList(agregarMateria(m));
+            }
+        }
         dao.saveMateria(m);
+
         if (m == null) {
             throw new MateriaNotFoundException("No se encontro el id de materia");
         }
