@@ -1,10 +1,12 @@
 package ar.edu.utn.frbb.tup.business.impl;
 
+import ar.edu.utn.frbb.tup.business.CarreraService;
 import ar.edu.utn.frbb.tup.business.MateriaService;
 import ar.edu.utn.frbb.tup.business.ProfesorService;
+import ar.edu.utn.frbb.tup.model.Carrera;
 import ar.edu.utn.frbb.tup.model.Materia;
-import ar.edu.utn.frbb.tup.model.Profesor;
 import ar.edu.utn.frbb.tup.model.dto.MateriaDto;
+import ar.edu.utn.frbb.tup.model.exception.CarreraNotFoundException;
 import ar.edu.utn.frbb.tup.model.exception.NombreMateriaException;
 import ar.edu.utn.frbb.tup.model.exception.ProfesorNoEncotnrado;
 import ar.edu.utn.frbb.tup.persistence.MateriaDao;
@@ -13,6 +15,7 @@ import ar.edu.utn.frbb.tup.persistence.exception.OrderMateriaException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -23,16 +26,28 @@ public class MateriaServiceImpl implements MateriaService {
     @Autowired
     private ProfesorService profesorService;
 
-    @Override
-    public Materia crearMateria(MateriaDto materia) throws IllegalArgumentException, ProfesorNoEncotnrado {
-        Materia m = new Materia();
-        m.setNombre(materia.getNombre());
-        m.setAnio(materia.getAnio());
-        m.setCuatrimestre(materia.getCuatrimestre());
-        m.setProfesor(profesorService.buscarProfesor(materia.getProfesorId()));
-        dao.saveMateria(m);
+    @Autowired
+    private CarreraService carreraService;
 
-        return m;
+    @Override
+    public Materia crearMateria(MateriaDto materia) throws IllegalArgumentException, ProfesorNoEncotnrado, CarreraNotFoundException {
+        if (!carreraService.getAllCarreras().isEmpty()) {
+            Materia m = new Materia();
+            m.setNombre(materia.getNombre());
+            m.setAnio(materia.getAnio());
+            m.setCuatrimestre(materia.getCuatrimestre());
+            m.setProfesor(profesorService.buscarProfesor(materia.getProfesorId()));
+            m.setCodigoCarrera(materia.getCodigoCarrera());
+            for(Carrera c: carreraService.getAllCarreras()){
+                if(materia.getCodigoCarrera() == c.getCodigoCarrera()){
+                    c.setMateriasList(agregarMateria(m));
+                }
+            }
+            dao.saveMateria(m);
+
+            return m;
+        }
+        throw new CarreraNotFoundException("No hay carreras para crear la materia");
     }
 
     @Override
@@ -87,13 +102,12 @@ public class MateriaServiceImpl implements MateriaService {
         return dao.ordenarMateria(order);
     }
 
-    /*@Override
-    public List<Materia> deleteMateriaById(int idMateria) throws MateriaNotFoundException{
-        for()
-    }*/
+    @Override
+    public List<Materia> agregarMateria(Materia materia){
+        List<Materia> materiaList = new ArrayList<>();
+        materiaList.add(materia);
 
-
-
-
+        return materiaList;
+    }
 
 }

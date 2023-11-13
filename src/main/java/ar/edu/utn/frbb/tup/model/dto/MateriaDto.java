@@ -10,6 +10,7 @@ public class MateriaDto {
     private int anio;
     private int cuatrimestre;
     private int profesorId;
+    private int codigoCarrera;
 
     public int getProfesorId() {
         return profesorId;
@@ -43,4 +44,11 @@ public class MateriaDto {
         this.cuatrimestre = cuatrimestre;
     }
 
+    public int getCodigoCarrera() {
+        return codigoCarrera;
+    }
+
+    public void setCodigoCarrera(int codigoCarrera) {
+        this.codigoCarrera = codigoCarrera;
+    }
 }

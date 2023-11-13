@@ -18,6 +18,11 @@ public class CarreraController {
     @Autowired
     private CarreraService carreraService;
 
+    @GetMapping("/carrera/{codigoCarrera}")
+    public ResponseEntity<Carrera> buscarCarreraByCodigo(@PathVariable Integer codigoCarrera) throws CarreraNotFoundException {
+        return ResponseEntity.status(HttpStatus.OK).body(carreraService.buscarCarreraByCodigo(codigoCarrera));
+    }
+
     @PostMapping("/carrera")
     public ResponseEntity<Carrera> crearCarrera(@RequestBody CarreraDto carreraDto) throws MateriaException {
         return ResponseEntity.status(HttpStatus.CREATED).body(carreraService.crearCarrera(carreraDto));

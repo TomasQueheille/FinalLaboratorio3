@@ -1,9 +1,7 @@
 package ar.edu.utn.frbb.tup.business.impl;
 
 import ar.edu.utn.frbb.tup.business.CarreraService;
-import ar.edu.utn.frbb.tup.business.MateriaService;
 import ar.edu.utn.frbb.tup.model.Carrera;
-import ar.edu.utn.frbb.tup.model.Materia;
 import ar.edu.utn.frbb.tup.model.dto.CarreraDto;
 import ar.edu.utn.frbb.tup.model.exception.MateriaException;
 import ar.edu.utn.frbb.tup.persistence.CarreraDao;
@@ -17,19 +15,6 @@ import java.util.*;
 public class CarreraServiceImpl implements CarreraService {
     @Autowired
     private CarreraDao dao;
-    @Autowired
-    private MateriaService materiaService;
-
-    public List <Materia> sinMaterias() throws MateriaException{
-        try {
-            if(!materiaService.getAllMaterias().isEmpty()){
-                return materiaService.getAllMaterias();
-            }
-            throw new MateriaException("No hay materias");
-        } catch (MateriaException e) {
-            throw new RuntimeException(e);
-        }
-    }
 
     @Override
     public List<Carrera> getAllCarreras() {
@@ -38,20 +23,14 @@ public class CarreraServiceImpl implements CarreraService {
 
     @Override
     public Carrera crearCarrera(CarreraDto carrera) throws MateriaException {
-        if (!materiaService.getAllMaterias().isEmpty()){
-            Carrera c = new Carrera();
-            c.setNombre(carrera.getNombre());
-            c.setCodigoCarrera(carrera.getCodigoCarrera());
-            c.setCantidadAnios(carrera.getCantidadAnios());
-            c.setDepartamento(carrera.getDepartamento());
-            c.setMateriasList(materiaService.getAllMaterias());
-            dao.saveCarrera(c);
+        Carrera c = new Carrera();
+        c.setNombre(carrera.getNombre());
+        c.setCodigoCarrera(carrera.getCodigoCarrera());
+        c.setCantidadAnios(carrera.getCantidadAnios());
+        c.setDepartamento(carrera.getDepartamento());
+        dao.saveCarrera(c);
 
-            return c;
-        }
-        else{
-            throw new MateriaException("No hay materias para crear la carrera");
-        }
+        return c;
     }
 
     @Override
@@ -61,7 +40,6 @@ public class CarreraServiceImpl implements CarreraService {
         c.setCodigoCarrera(carrera.getCodigoCarrera());
         c.setCantidadAnios(carrera.getCantidadAnios());
         c.setDepartamento(carrera.getDepartamento());
-        c.setMateriasList(materiaService.getAllMaterias());
         dao.saveCarrera(c);
 
         if(c == null){
@@ -83,6 +61,10 @@ public class CarreraServiceImpl implements CarreraService {
         throw new CarreraNotFoundException("La carrera no fue encontrada");
     }
 
+    @Override
+    public Carrera buscarCarreraByCodigo(int codigoCarrera) throws CarreraNotFoundException {
+        return dao.findByCodigo(codigoCarrera);
+    }
 
 
 }

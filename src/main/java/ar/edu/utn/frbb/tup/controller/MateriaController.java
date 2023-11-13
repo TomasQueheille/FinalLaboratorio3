@@ -7,6 +7,7 @@ import ar.edu.utn.frbb.tup.model.Materia;
 import ar.edu.utn.frbb.tup.model.Profesor;
 import ar.edu.utn.frbb.tup.model.dto.AlumnoDto;
 import ar.edu.utn.frbb.tup.model.dto.MateriaDto;
+import ar.edu.utn.frbb.tup.model.exception.CarreraNotFoundException;
 import ar.edu.utn.frbb.tup.model.exception.NombreMateriaException;
 import ar.edu.utn.frbb.tup.model.exception.ProfesorNoEncotnrado;
 import ar.edu.utn.frbb.tup.persistence.exception.MateriaNotFoundException;
@@ -33,7 +34,7 @@ public class MateriaController {
     }*/
 
     @PostMapping("/materia")
-    public ResponseEntity<Materia> crearMateria(@RequestBody MateriaDto materiaDto) throws ProfesorNoEncotnrado {
+    public ResponseEntity<Materia> crearMateria(@RequestBody MateriaDto materiaDto) throws ProfesorNoEncotnrado, CarreraNotFoundException {
 
         return ResponseEntity.status(HttpStatus.CREATED).body(materiaService.crearMateria(materiaDto));
     }

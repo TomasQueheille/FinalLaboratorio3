@@ -13,9 +13,10 @@ import ar.edu.utn.frbb.tup.persistence.exception.MateriaNotFoundException;
 import java.util.List;
 
 public interface CarreraService {
-    public List<Materia> sinMaterias() throws MateriaException;
     List<Carrera> getAllCarreras();
     Carrera crearCarrera(CarreraDto carrera) throws MateriaException;
     Carrera editCarreraById(int codigoCarrera, CarreraDto carrera) throws CarreraNotFoundException;
     Carrera deleteCarreraById(int codigoCarrera) throws CarreraNotFoundException;
+
+    Carrera buscarCarreraByCodigo(int codigoCarrera) throws CarreraNotFoundException;
 }

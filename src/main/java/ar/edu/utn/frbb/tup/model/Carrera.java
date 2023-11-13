@@ -1,5 +1,7 @@
 package ar.edu.utn.frbb.tup.model;
 
+import ar.edu.utn.frbb.tup.model.dto.MateriaDto;
+
 import java.util.List;
 
 
@@ -60,7 +62,7 @@ public class Carrera {
         this.materiasList = materiasList;
     }
 
-    public void agregarMateria(Materia materia) {
+    public void agregarMateria(MateriaDto materia) {
     }
 
 }

@@ -44,17 +44,18 @@ public class Materia {
     private int anio;
     private int cuatrimestre;
     private Profesor profesor;
-
+    private int codigoCarrera;
     private List<Materia> correlatividades;
 
     public Materia(){}
 
 
-    public Materia(String nombre, int anio, int cuatrimestre, Profesor profesor) {
+    public Materia(String nombre, int anio, int cuatrimestre, Profesor profesor, int codigoCarrera) {
         this.anio = anio;
         this.cuatrimestre = cuatrimestre;
         this.nombre = nombre;
         this.profesor = profesor;
+        this.codigoCarrera = codigoCarrera;
 
         correlatividades = new ArrayList<>();
     }
@@ -78,6 +79,14 @@ public class Materia {
 
     public void setMateriaId(int materiaId) {
         this.materiaId = materiaId;
+    }
+
+    public int getCodigoCarrera() {
+        return codigoCarrera;
+    }
+
+    public void setCodigoCarrera(int codigoCarrera) {
+        this.codigoCarrera = codigoCarrera;
     }
 
     @Override
