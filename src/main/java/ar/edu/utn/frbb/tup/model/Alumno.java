@@ -83,7 +83,7 @@ public class Alumno {
         for (Asignatura a:
                 asignaturas) {
             if (correlativa.getNombre().equals(a.getNombreAsignatura())) {
-                if (!EstadoAsignatura.APROBADA.equals(a.getEstado())) {
+                if (!EstadoAsignatura.APROBAR.equals(a.getEstado())) {
                     throw new CorrelatividadException("La asignatura " + a.getNombreAsignatura() + " no está aprobada");
                 }
             }

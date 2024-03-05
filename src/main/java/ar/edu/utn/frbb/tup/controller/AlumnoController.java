@@ -35,6 +35,9 @@ public class AlumnoController {
         return ResponseEntity.status(HttpStatus.OK).body(alumnoService.deleteAlumnoById(idAlumno));
     }
 
+    /*@PutMapping("/alumno/{idAlumno}/asignatura/{idAsignatura}")
+    public ResponseEntity<Alumno> editAlumnoAsignaturaById*/
+
 
 
 }

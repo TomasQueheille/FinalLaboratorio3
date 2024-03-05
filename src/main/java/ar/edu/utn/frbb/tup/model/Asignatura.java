@@ -6,15 +6,25 @@ import java.util.Optional;
 
 public class Asignatura {
 
+    private Long idAsignatura;
     private Materia materia;
     private EstadoAsignatura estado;
     private Integer nota;
 
     public Asignatura() {
     }
-    public Asignatura(Materia materia) {
+    public Asignatura(Materia materia, long idAsignatura) {
+        this.idAsignatura = idAsignatura;
         this.materia = materia;
-        this.estado = EstadoAsignatura.NO_CURSADA;
+        this.estado = EstadoAsignatura.CURSAR;
+    }
+
+    public Long getIdAsignatura() {
+        return idAsignatura;
+    }
+
+    public void setIdAsignatura(Long idAsignatura) {
+        this.idAsignatura = idAsignatura;
     }
 
     public Optional<Integer> getNota() {
@@ -41,16 +51,16 @@ public class Asignatura {
         return materia;
     }
 
-    public void cursarAsignatura(){
-        this.estado = EstadoAsignatura.CURSADA;
-    }
+    /*public void cursarAsignatura(){
+        this.estado = EstadoAsignatura.CURSAR;
+    }*/
 
     public void aprobarAsignatura(int nota) throws EstadoIncorrectoException {
-        if (!this.estado.equals(EstadoAsignatura.CURSADA)) {
+        if (!this.estado.equals(EstadoAsignatura.CURSAR)) {
             throw new EstadoIncorrectoException("La materia debe estar cursada");
         }
         if (nota>=4) {
-            this.estado = EstadoAsignatura.APROBADA;
+            this.estado = EstadoAsignatura.APROBAR;
             this.nota = nota;
         }
     }
