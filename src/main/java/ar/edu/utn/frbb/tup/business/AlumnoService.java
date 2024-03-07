@@ -1,8 +1,10 @@
 package ar.edu.utn.frbb.tup.business;
 
 import ar.edu.utn.frbb.tup.model.Alumno;
+import ar.edu.utn.frbb.tup.model.Asignatura;
 import ar.edu.utn.frbb.tup.model.Materia;
 import ar.edu.utn.frbb.tup.model.dto.AlumnoDto;
+import ar.edu.utn.frbb.tup.model.dto.AsignaturaDto;
 import ar.edu.utn.frbb.tup.model.exception.CorrelatividadesNoAprobadasException;
 import ar.edu.utn.frbb.tup.model.exception.EstadoIncorrectoException;
 import ar.edu.utn.frbb.tup.persistence.exception.AlumnoNotFoundException;
@@ -17,5 +19,8 @@ public interface AlumnoService {
     Alumno buscarAlumnoId(int id) throws AlumnoNotFoundException;
 
     Alumno editAlumnobyId(int id, AlumnoDto alumno) throws AlumnoNotFoundException;
+
+    Asignatura editAsignaturaAlumnoById(int idAlumno, long idAsignatura, AsignaturaDto asignaturaDto) throws AlumnoNotFoundException;
+
     Alumno deleteAlumnoById(int id) throws AlumnoNotFoundException;
 }

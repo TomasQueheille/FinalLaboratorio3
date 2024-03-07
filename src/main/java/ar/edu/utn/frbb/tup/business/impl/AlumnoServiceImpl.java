@@ -5,16 +5,16 @@ import ar.edu.utn.frbb.tup.business.AsignaturaService;
 import ar.edu.utn.frbb.tup.model.Alumno;
 import ar.edu.utn.frbb.tup.model.Asignatura;
 import ar.edu.utn.frbb.tup.model.EstadoAsignatura;
-import ar.edu.utn.frbb.tup.model.Materia;
 import ar.edu.utn.frbb.tup.model.dto.AlumnoDto;
+import ar.edu.utn.frbb.tup.model.dto.AsignaturaDto;
 import ar.edu.utn.frbb.tup.model.exception.CorrelatividadesNoAprobadasException;
 import ar.edu.utn.frbb.tup.model.exception.EstadoIncorrectoException;
 import ar.edu.utn.frbb.tup.persistence.AlumnoDao;
+import ar.edu.utn.frbb.tup.persistence.AsignaturaDao;
 import ar.edu.utn.frbb.tup.persistence.exception.AlumnoNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
@@ -30,6 +30,8 @@ public class AlumnoServiceImpl implements AlumnoService {
 
     @Autowired
     private AsignaturaService asignaturaService;
+    @Autowired
+    private AsignaturaDao asignaturaDao;
 
     @Override
     public void aprobarAsignatura(int materiaId, int nota, int dni) throws EstadoIncorrectoException, CorrelatividadesNoAprobadasException {
@@ -47,8 +49,8 @@ public class AlumnoServiceImpl implements AlumnoService {
         a.setNombre(alumno.getNombre());
         a.setApellido(alumno.getApellido());
         a.setDni(alumno.getDni());
-        List<Asignatura> asignaturaList = new ArrayList<>();
-        a.setAsignaturas(asignaturaList);
+        List<Asignatura> asignaturasList = asignaturaService.asignaturaList();
+        a.setAsignaturas(asignaturasList);
         Random random = new Random();
         a.setId(random.nextInt());
         alumnoDao.saveAlumno(a);
@@ -70,6 +72,24 @@ public class AlumnoServiceImpl implements AlumnoService {
         alumnoDao.saveAlumno(a);
 
         return a;
+    }
+
+    @Override
+    public Asignatura editAsignaturaAlumnoById(int idAlumno, long idAsignatura, AsignaturaDto asignaturaDto) throws AlumnoNotFoundException {
+        Alumno alumno = alumnoDao.findAlumnoId(idAlumno);
+        Asignatura asignatura = asignaturaDao.getAsignaturabyId(idAsignatura);
+
+        if(asignaturaDto.getNota() == null){
+            asignaturaDto.setEstado(EstadoAsignatura.CURSAR);
+        } else if (asignaturaDto.getNota() <= 5) {
+            asignaturaDto.setEstado(EstadoAsignatura.PERDER);
+        } else if (asignaturaDto.getNota() <= 10) {
+            asignaturaDto.setEstado(EstadoAsignatura.APROBAR);
+        }
+        asignaturaService.actualizarAsignatura(asignatura);
+        alumnoDao.saveAlumno(alumno);
+
+        return asignatura;
     }
 
     @Override
