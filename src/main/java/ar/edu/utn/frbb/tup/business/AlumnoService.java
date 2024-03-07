@@ -20,7 +20,7 @@ public interface AlumnoService {
 
     Alumno editAlumnobyId(int id, AlumnoDto alumno) throws AlumnoNotFoundException;
 
-    Asignatura editAsignaturaAlumnoById(int idAlumno, long idAsignatura, AsignaturaDto asignaturaDto) throws AlumnoNotFoundException;
+    Asignatura editAsignaturaAlumnoById(int idAlumno, long idAsignatura, AsignaturaDto asignaturaDto) throws AlumnoNotFoundException, EstadoIncorrectoException;
 
     Alumno deleteAlumnoById(int id) throws AlumnoNotFoundException;
 }

@@ -75,16 +75,16 @@ public class AlumnoServiceImpl implements AlumnoService {
     }
 
     @Override
-    public Asignatura editAsignaturaAlumnoById(int idAlumno, long idAsignatura, AsignaturaDto asignaturaDto) throws AlumnoNotFoundException {
+    public Asignatura editAsignaturaAlumnoById(int idAlumno, long idAsignatura, AsignaturaDto asignaturaDto) throws AlumnoNotFoundException, EstadoIncorrectoException {
         Alumno alumno = alumnoDao.findAlumnoId(idAlumno);
         Asignatura asignatura = asignaturaDao.getAsignaturabyId(idAsignatura);
 
         if(asignaturaDto.getNota() == null){
-            asignaturaDto.setEstado(EstadoAsignatura.CURSAR);
+            asignatura.cursarAsignatura();
         } else if (asignaturaDto.getNota() <= 5) {
-            asignaturaDto.setEstado(EstadoAsignatura.PERDER);
-        } else if (asignaturaDto.getNota() <= 10) {
-            asignaturaDto.setEstado(EstadoAsignatura.APROBAR);
+            asignatura.perderAsignatura(asignaturaDto.getNota());
+        } else if (asignaturaDto.getNota() >= 5) {
+            asignatura.aprobarAsignatura(asignaturaDto.getNota());
         }
         asignaturaService.actualizarAsignatura(asignatura);
         alumnoDao.saveAlumno(alumno);

@@ -5,6 +5,7 @@ import ar.edu.utn.frbb.tup.model.Alumno;
 import ar.edu.utn.frbb.tup.model.Asignatura;
 import ar.edu.utn.frbb.tup.model.dto.AlumnoDto;
 import ar.edu.utn.frbb.tup.model.dto.AsignaturaDto;
+import ar.edu.utn.frbb.tup.model.exception.EstadoIncorrectoException;
 import ar.edu.utn.frbb.tup.persistence.exception.AlumnoNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -38,7 +39,7 @@ public class AlumnoController {
     }
 
     @PutMapping("/{idAlumno}/asignatura/{idAsignatura}")
-    public ResponseEntity<Asignatura> editAsignaturaAlumnoById(@PathVariable Integer idAlumno, @PathVariable Long idAsignatura, @RequestBody AsignaturaDto asignaturaDto) throws AlumnoNotFoundException {
+    public ResponseEntity<Asignatura> editAsignaturaAlumnoById(@PathVariable Integer idAlumno, @PathVariable Long idAsignatura, @RequestBody AsignaturaDto asignaturaDto) throws AlumnoNotFoundException, EstadoIncorrectoException {
         return ResponseEntity.status(HttpStatus.OK).body(alumnoService.editAsignaturaAlumnoById(idAlumno, idAsignatura, asignaturaDto));
     }
 

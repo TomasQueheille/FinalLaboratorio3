@@ -51,9 +51,9 @@ public class Asignatura {
         return materia;
     }
 
-    /*public void cursarAsignatura(){
+    public void cursarAsignatura(){
         this.estado = EstadoAsignatura.CURSAR;
-    }*/
+    }
 
     public void aprobarAsignatura(int nota) throws EstadoIncorrectoException {
         if (!this.estado.equals(EstadoAsignatura.CURSAR)) {
@@ -61,6 +61,13 @@ public class Asignatura {
         }
         if (nota>=4) {
             this.estado = EstadoAsignatura.APROBAR;
+            this.nota = nota;
+        }
+    }
+
+    public void perderAsignatura(int nota){
+        if(nota<=4){
+            this.estado = EstadoAsignatura.PERDER;
             this.nota = nota;
         }
     }
