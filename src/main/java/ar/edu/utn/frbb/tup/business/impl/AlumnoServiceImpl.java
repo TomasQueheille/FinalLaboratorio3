@@ -88,7 +88,7 @@ public class AlumnoServiceImpl implements AlumnoService {
         }
         asignaturaService.actualizarAsignatura(asignatura);
         alumno.actualizarAsignatura(asignatura);
-        alumnoDao.saveAlumno(alumno);
+        //alumnoDao.saveAlumno(alumno);
 
         return asignatura;
     }
