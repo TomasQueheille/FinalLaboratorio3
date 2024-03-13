@@ -36,18 +36,21 @@ public class CarreraServiceImpl implements CarreraService {
     @Override
     public Carrera editCarreraById(int codigoCarrera, CarreraDto carrera) throws CarreraNotFoundException {
         Carrera c = dao.findByCodigo(codigoCarrera);
+
+        if (c == null) {
+            throw new CarreraNotFoundException("No se encontró la carrera con ese codigo " + codigoCarrera);
+        }
+
         c.setNombre(carrera.getNombre());
         c.setCodigoCarrera(carrera.getCodigoCarrera());
         c.setCantidadAnios(carrera.getCantidadAnios());
         c.setDepartamento(carrera.getDepartamento());
-        dao.saveCarrera(c);
 
-        if(c == null){
-            throw new CarreraNotFoundException("No se encontró la carrera con ese codigo " + codigoCarrera);
-        }
+        dao.saveCarrera(c);
 
         return c;
     }
+
 
     @Override
     public Carrera deleteCarreraById(int codigoCarrera) throws CarreraNotFoundException {

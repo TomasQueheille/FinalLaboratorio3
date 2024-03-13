@@ -1,7 +1,7 @@
 package ar.edu.utn.frbb.tup.model;
 
-import ar.edu.utn.frbb.tup.model.dto.MateriaDto;
 
+import java.util.Objects;
 import java.util.List;
 
 
@@ -62,7 +62,18 @@ public class Carrera {
         this.materiasList = materiasList;
     }
 
-    public void agregarMateria(MateriaDto materia) {
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Carrera carrera = (Carrera) o;
+        return codigoCarrera == carrera.codigoCarrera &&
+                Objects.equals(nombre, carrera.nombre);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(codigoCarrera, nombre);
     }
 
 }

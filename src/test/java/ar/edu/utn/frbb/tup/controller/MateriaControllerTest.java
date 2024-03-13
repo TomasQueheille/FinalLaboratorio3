@@ -30,7 +30,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 public class MateriaControllerTest {
 
-    /*@InjectMocks
+    @InjectMocks
     MateriaController materiaController;
 
     @Mock
@@ -45,7 +45,6 @@ public class MateriaControllerTest {
 
     @Test
     public void testCrearMateria_Success() throws Exception {
-        // Configuración del mock
         MateriaDto materiaDto = new MateriaDto();
         materiaDto.setNombre("Laboratorio II");
         materiaDto.setAnio(1);
@@ -53,7 +52,6 @@ public class MateriaControllerTest {
         materiaDto.setProfesorId(345);
         when(materiaService.crearMateria(any())).thenReturn(new Materia());
 
-        // Ejecución del método bajo prueba
         MvcResult result = mockMvc.perform(MockMvcRequestBuilders.post("/materia")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content("{\"nombre\":\"Laboratorio II\",\"anio\":1,\"cuatrimestre\":2,\"profesorId\":345}")
@@ -61,22 +59,19 @@ public class MateriaControllerTest {
                 .andExpect(status().isCreated())
                 .andReturn();
 
-        // Verificación
         Assertions.assertEquals(HttpStatus.CREATED.value(), result.getResponse().getStatus());
     }
 
     @Test
     public void testCrearMateria_BadRequest() throws Exception {
-        // Configuración del mock
         when(materiaService.crearMateria(any())).thenReturn(new Materia());
 
-        // Ejecución del método bajo prueba
         MvcResult result = mockMvc.perform(MockMvcRequestBuilders.post("/materia")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content("{\"nombre\":\"Laboratorio II\",\"anio\":\"segundo\",\"cuatrimestre\":1,\"profesorId\":2}")
                         .accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().isBadRequest())
                 .andReturn();
-    }*/
+    }
 }
 
