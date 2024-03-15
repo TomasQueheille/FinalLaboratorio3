@@ -30,7 +30,12 @@ public class AlumnoController {
 
     @PutMapping("/{idAlumno}")
     public ResponseEntity<Alumno> editAlumnobyId(@PathVariable Integer idAlumno, @RequestBody AlumnoDto alumnoDto) throws AlumnoNotFoundException {
-        return ResponseEntity.status(HttpStatus.OK).body(alumnoService.editAlumnobyId(idAlumno, alumnoDto));
+        try {
+            Alumno alumnoEditado = alumnoService.editAlumnobyId(idAlumno, alumnoDto);
+            return ResponseEntity.ok(alumnoEditado);
+        } catch (AlumnoNotFoundException ex) {
+            return ResponseEntity.notFound().build();
+        }
     }
 
     @DeleteMapping("/{idAlumno}")
@@ -39,8 +44,15 @@ public class AlumnoController {
     }
 
     @PutMapping("/{idAlumno}/asignatura/{idAsignatura}")
-    public ResponseEntity<Asignatura> editAsignaturaAlumnoById(@PathVariable Integer idAlumno, @PathVariable Long idAsignatura, @RequestBody AsignaturaDto asignaturaDto) throws AlumnoNotFoundException, EstadoIncorrectoException {
-        return ResponseEntity.status(HttpStatus.OK).body(alumnoService.editAsignaturaAlumnoById(idAlumno, idAsignatura, asignaturaDto));
+    public ResponseEntity<Asignatura> editAsignaturaAlumnoById(@PathVariable Integer idAlumno, @PathVariable Long idAsignatura, @RequestBody AsignaturaDto asignaturaDto) {
+        try {
+            Asignatura asignatura = alumnoService.editAsignaturaAlumnoById(idAlumno, idAsignatura, asignaturaDto);
+            return ResponseEntity.ok(asignatura);
+        } catch (AlumnoNotFoundException e) {
+            return ResponseEntity.notFound().build();
+        } catch (EstadoIncorrectoException e) {
+            return ResponseEntity.badRequest().build(); // Manejar otra excepción si es necesario
+        }
     }
 
 

@@ -9,6 +9,7 @@ import ar.edu.utn.frbb.tup.model.exception.EstadoIncorrectoException;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class Alumno {
     private int id;
@@ -122,5 +123,19 @@ public class Alumno {
     public void setId(int id) {
         this.id = id;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Alumno alumno = (Alumno) o;
+        return dni == alumno.dni && Objects.equals(nombre, alumno.nombre);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(dni, nombre);
+    }
+
 
 }

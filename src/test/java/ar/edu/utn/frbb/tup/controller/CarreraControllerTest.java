@@ -76,27 +76,5 @@ class CarreraControllerTest {
         assertEquals(carrera, responseEntity.getBody());
     }
 
-    /*@Test
-    void editCarreraById_NotFound() throws CarreraNotFoundException{
-        int codigoCarrera = 1;
-        CarreraDto carreraDto = new CarreraDto();
-        when(carreraService.editCarreraById(eq(codigoCarrera), any(CarreraDto.class)))
-                .thenThrow(new CarreraNotFoundException("Carrera no encontrada"));
-
-        ResponseEntity<Carrera> responseEntity = carreraController.editCarreraById(codigoCarrera, carreraDto);
-
-        assertEquals(HttpStatus.NOT_FOUND, responseEntity.getStatusCode());
-    }*/
-
-    /*@Test
-    void deleteCarreraById_NotFound() throws Exception {
-        int codigoCarrera = 1;
-        when(carreraService.deleteCarreraById(codigoCarrera)).thenThrow(new CarreraNotFoundException("Carrera no encontrada"));
-
-        mockMvc.perform(delete("/carrera/{codigoCarrera}", codigoCarrera))
-                .andExpect(status().isNotFound())
-                .andExpect(content().string("Carrera no encontrada"));
-    }*/
-
 }
 
