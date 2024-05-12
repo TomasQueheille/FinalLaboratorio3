@@ -2,6 +2,7 @@ package ar.edu.utn.frbb.tup.persistence;
 
 import ar.edu.utn.frbb.tup.model.Carrera;
 import ar.edu.utn.frbb.tup.model.Materia;
+import ar.edu.utn.frbb.tup.model.exception.NombreMateriaException;
 import ar.edu.utn.frbb.tup.persistence.exception.MateriaNotFoundException;
 import ar.edu.utn.frbb.tup.persistence.exception.OrderMateriaException;
 import org.springframework.stereotype.Service;
@@ -27,7 +28,7 @@ public class MateriaDaoMemoryImpl implements MateriaDao {
     @Override
     public Materia saveMateria(Materia materia) {
         Random random = new Random();
-        materia.setMateriaId(random.nextInt());
+        materia.setMateriaId(random.nextInt(1,1000000));
         repositorioMateria.put(materia.getMateriaId(), materia);
         return materia;
     }
@@ -44,13 +45,13 @@ public class MateriaDaoMemoryImpl implements MateriaDao {
     }
 
     @Override
-    public Materia buscarNombreMateria(String nombre) {
+    public Materia buscarNombreMateria(String nombre) throws NombreMateriaException {
         for (Materia m : repositorioMateria.values()){
-            if (m.getNombre() == nombre){
+            if (Objects.equals(m.getNombre(), nombre)){
                 return m;
             }
         }
-        return null;
+        throw new NombreMateriaException("No se encontró la materia con ese nombre " + nombre);
     }
 
     @Override

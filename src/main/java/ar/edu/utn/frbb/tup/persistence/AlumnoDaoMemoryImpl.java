@@ -30,7 +30,7 @@ public class AlumnoDaoMemoryImpl implements AlumnoDao {
     @Override
     public Alumno saveAlumno(Alumno alumno) {
         Random random = new Random();
-        alumno.setId(random.nextInt());
+        alumno.setId(random.nextInt(1,1000000));
         repositorioAlumnos.put(alumno.getDni(), alumno);
         return alumno; // Devuelve el mismo alumno si se guarda correctamente
     }

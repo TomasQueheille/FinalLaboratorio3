@@ -29,6 +29,8 @@ public class MateriaServiceImpl implements MateriaService {
     @Autowired
     private CarreraService carreraService;
 
+    List<Materia> materiaList = new ArrayList<>();
+
     @Override
     public Materia crearMateria(MateriaDto materia) throws IllegalArgumentException, ProfesorNoEncotnrado, CarreraNotFoundException {
         if (!carreraService.getAllCarreras().isEmpty()) {
@@ -114,7 +116,6 @@ public class MateriaServiceImpl implements MateriaService {
 
     @Override
     public List<Materia> agregarMateria(Materia materia){
-        List<Materia> materiaList = new ArrayList<>();
         materiaList.add(materia);
 
         return materiaList;
